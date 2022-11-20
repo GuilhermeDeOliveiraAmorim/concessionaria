@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import api from "../../../services/backend";
+import { Nav } from '../../../util/nav';
 
 interface ICar {
     id: number,
@@ -42,30 +43,33 @@ interface IListSales {
 export default function ListSales(props: IListSales) {
     const { sales } = props;
     return (
-        <Container maxW='1280px'>
-            <TableContainer>
-                <Table variant='striped' colorScheme='teal'>
-                    <Thead>
-                        <Tr>
-                            <Th>Vendedor</Th>
-                            <Th>Modelo</Th>
-                            <Th>Data</Th>
-                            <Th isNumeric>Valor</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {sales.map(sale =>
-                            <Tr key={sale.id}>
-                                <Td>{sale.seller.name}</Td>
-                                <Td>{sale.car.model}</Td>
-                                <Td>{sale.created_at}</Td>
-                                <Td isNumeric>{sale.car.value}</Td>
+        <div>
+            <Nav />
+            <Container maxW='1280px'>
+                <TableContainer>
+                    <Table variant='striped' colorScheme='teal'>
+                        <Thead>
+                            <Tr>
+                                <Th>Vendedor</Th>
+                                <Th>Modelo</Th>
+                                <Th>Data</Th>
+                                <Th isNumeric>Valor</Th>
                             </Tr>
-                        )}
-                    </Tbody>
-                </Table>
-            </TableContainer>
-        </Container>
+                        </Thead>
+                        <Tbody>
+                            {sales.map(sale =>
+                                <Tr key={sale.id}>
+                                    <Td>{sale.seller.name}</Td>
+                                    <Td>{sale.car.model}</Td>
+                                    <Td>{sale.created_at}</Td>
+                                    <Td isNumeric>{sale.car.value}</Td>
+                                </Tr>
+                            )}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+            </Container>
+        </div>
     );
 }
 

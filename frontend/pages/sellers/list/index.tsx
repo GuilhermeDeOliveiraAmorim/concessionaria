@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { Container } from '@chakra-ui/react';
 import api from "../../../services/backend";
+import { Nav } from '../../../util/nav';
 
 interface ISeller {
     id: number,
@@ -22,24 +23,28 @@ interface IListSellers {
 export default function ListSellers(props: IListSellers) {
     const { sellers } = props;
     return (
-        <Container maxW='1280px'>
-            <TableContainer>
-                <Table variant='striped' colorScheme='teal'>
-                    <Thead>
-                        <Tr>
-                            <Th>Vendedor</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {sellers.map(seller =>
-                            <Tr key={seller.id}>
-                                <Td>{seller.name}</Td>
+        <div>
+            <Nav />
+            <Container maxW='1280px'>
+                <TableContainer>
+                    <Table variant='striped' colorScheme='teal'>
+                        <Thead>
+                            <Tr>
+                                <Th>Vendedor</Th>
                             </Tr>
-                        )}
-                    </Tbody>
-                </Table>
-            </TableContainer>
-        </Container>
+                        </Thead>
+                        <Tbody>
+                            {sellers.map(seller =>
+                                <Tr key={seller.id}>
+                                    <Td>{seller.name}</Td>
+                                </Tr>
+                            )}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+            </Container>
+        </div>
+
     );
 }
 

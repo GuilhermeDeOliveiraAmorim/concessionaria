@@ -1,8 +1,10 @@
 import api from "../../services/backend";
+import { Nav } from "../../util/nav";
 
 export default function Sales() {
     return (
         <div>
+            <Nav />
             Sales
         </div>
     );

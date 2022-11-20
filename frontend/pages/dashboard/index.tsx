@@ -1,4 +1,5 @@
 import api from "../../services/backend";
+import { Nav } from "../../util/nav";
 
 interface ICar {
 	id: number,
@@ -35,6 +36,7 @@ export default function Dashboard(props: HomeProps) {
 	const { cars, sellers, sales } = props;
 	return (
 		<div>
+			<Nav />
 			{cars.map(car =>
 				<p key={car.id}>
 					{car.make}

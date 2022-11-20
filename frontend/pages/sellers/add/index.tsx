@@ -3,6 +3,7 @@ import { useToast } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import { FormEvent, useState } from "react";
 import api from "../../../services/backend";
+import { Nav } from "../../../util/nav";
 
 interface ISeller {
     id: number,
@@ -45,16 +46,20 @@ export default function AddSellers() {
     }
 
     return (
-        <Container maxW='1280px'>
-            <form onSubmit={addCar}>
-                <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
-                    <FormControl>
-                        <FormLabel>Vendedor</FormLabel>
-                        <Input type='text' onChange={event => setName(event.target.value)} value={name} />
-                    </FormControl>
-                    <Button colorScheme='blue' type="submit">Adicionar</Button>
-                </Flex>
-            </form>
-        </Container>
+        <div>
+            <Nav />
+            <Container maxW='1280px'>
+                <form onSubmit={addCar}>
+                    <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
+                        <FormControl>
+                            <FormLabel>Vendedor</FormLabel>
+                            <Input type='text' onChange={event => setName(event.target.value)} value={name} />
+                        </FormControl>
+                        <Button colorScheme='blue' type="submit">Adicionar</Button>
+                    </Flex>
+                </form>
+            </Container>
+        </div>
+
     );
 }

@@ -3,6 +3,7 @@ import { useToast } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import { FormEvent, useState } from "react";
 import api from "../../../services/backend";
+import { Nav } from "../../../util/nav";
 
 interface ICar {
     id: number,
@@ -62,32 +63,35 @@ export default function AddCars() {
     }
 
     return (
-        <Container maxW='1280px'>
-            <form onSubmit={addCar}>
-                <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
-                    <FormControl>
-                        <FormLabel>Montadora</FormLabel>
-                        <Input type='text' onChange={event => setMake(event.target.value)} value={make} />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Modelo</FormLabel>
-                        <Input type='text' onChange={event => setModel(event.target.value)} value={model} />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Tipo de Transmissão</FormLabel>
-                        <Input type='text' onChange={event => setTransmission(event.target.value)} value={transmission} />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Ano</FormLabel>
-                        <Input type='text' onChange={event => setYear(event.target.value)} value={year} />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Valor</FormLabel>
-                        <Input type='text' onChange={event => setValue(event.target.value)} value={value} />
-                    </FormControl>
-                    <Button colorScheme='blue' type="submit">Adicionar</Button>
-                </Flex>
-            </form>
-        </Container>
+        <div>
+            <Nav />
+            <Container maxW='1280px'>
+                <form onSubmit={addCar}>
+                    <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
+                        <FormControl>
+                            <FormLabel>Montadora</FormLabel>
+                            <Input type='text' onChange={event => setMake(event.target.value)} value={make} />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Modelo</FormLabel>
+                            <Input type='text' onChange={event => setModel(event.target.value)} value={model} />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Tipo de Transmissão</FormLabel>
+                            <Input type='text' onChange={event => setTransmission(event.target.value)} value={transmission} />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Ano</FormLabel>
+                            <Input type='text' onChange={event => setYear(event.target.value)} value={year} />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Valor</FormLabel>
+                            <Input type='text' onChange={event => setValue(event.target.value)} value={value} />
+                        </FormControl>
+                        <Button colorScheme='blue' type="submit">Adicionar</Button>
+                    </Flex>
+                </form>
+            </Container>
+        </div>
     );
 }

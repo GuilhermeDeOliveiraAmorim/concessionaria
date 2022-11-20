@@ -4,6 +4,7 @@ import { useToast } from '@chakra-ui/react';
 import { Container } from '@chakra-ui/react';
 import { FormEvent, useState } from "react";
 import api from "../../../services/backend";
+import { Nav } from "../../../util/nav";
 
 interface ICar {
     id: number,
@@ -70,27 +71,30 @@ export default function AddSales(props: IAddSales) {
     }
 
     return (
-        <Container maxW='1280px'>
-            <form onSubmit={addCar}>
-                <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
-                    <FormControl>
-                        <Select placeholder='Carro' onChange={event => setCar(event.target.value)} value={car}>
-                            {cars.map(car =>
-                                <option key={car.id} value={car.id}>{car.model}</option>
-                            )}
-                        </Select>
-                    </FormControl>
-                    <FormControl>
-                        <Select placeholder='Vendedor' onChange={event => setSeller(event.target.value)} value={seller}>
-                            {sellers.map(seller =>
-                                <option key={seller.id} value={seller.id}>{seller.name}</option>
-                            )}
-                        </Select>
-                    </FormControl>
-                    <Button colorScheme='blue' type="submit">Adicionar</Button>
-                </Flex>
-            </form>
-        </Container>
+        <div>
+            <Nav />
+            <Container maxW='1280px'>
+                <form onSubmit={addCar}>
+                    <Flex w='100%' p={4} gap={4} flexDirection={"column"}>
+                        <FormControl>
+                            <Select placeholder='Carro' onChange={event => setCar(event.target.value)} value={car}>
+                                {cars.map(car =>
+                                    <option key={car.id} value={car.id}>{car.model}</option>
+                                )}
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <Select placeholder='Vendedor' onChange={event => setSeller(event.target.value)} value={seller}>
+                                {sellers.map(seller =>
+                                    <option key={seller.id} value={seller.id}>{seller.name}</option>
+                                )}
+                            </Select>
+                        </FormControl>
+                        <Button colorScheme='blue' type="submit">Adicionar</Button>
+                    </Flex>
+                </form>
+            </Container>
+        </div>
     );
 }
 
