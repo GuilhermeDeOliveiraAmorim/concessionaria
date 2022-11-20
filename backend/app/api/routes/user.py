@@ -22,7 +22,8 @@ def add_user(request: AddUser, db: Session = Depends(get_db)):
     return user
 
 
-@router.get('/{user_id}')
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(User).get(user_id)
+@router.post('/login')
+def get_user(request: AddUser, db: Session = Depends(get_db)):
+    user = db.query(User).filter((User.email == request.email)
+                                 and (User.password == request.password)).first()
     return user

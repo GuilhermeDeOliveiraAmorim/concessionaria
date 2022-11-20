@@ -1,71 +1,84 @@
+import { Box, Button, Flex, FormControl, FormLabel, Input, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 import { api } from "../get-api/axios";
 
-interface IUser {
-	id: number,
-	email: string,
-	password: string,
-	is_available: number
-}
+export default function Home() {
+	const router = useRouter();
 
-interface ICar {
-	id: number,
-	make: string,
-	model: string,
-	transmission: string,
-	year: number,
-	value: number,
-	is_available: number
-}
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
-interface ISeller {
-	id: number,
-	name: string
-}
+	const toast = useToast();
 
-interface ISale {
-	id: number,
-	car_id: number,
-	seller_id: number,
-	created_at: string,
-	is_available: number
-	car: ICar,
-	seller: ISeller
-}
+	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
 
-interface HomeProps {
-	user: IUser;
-	cars: ICar[];
-	sellers: ISeller[];
-	sales: ISale[];
-}
+		try {
+			const response = await api.post("/users/login", {
+				email: email,
+				password: password
+			});
 
-export default function Home(props: HomeProps) {
-	const { user, cars, sellers, sales } = props;
-	return (
-		<div>
-			{cars.map(car =>
-				<p key={car.id}>
-					{car.make}
-				</p>
-			)}
-		</div>
-	);
-}
+			if (response.data !== null) {
+				toast({
+					title: 'Login aceito',
+					description: "Direcionando para o dashboard",
+					status: 'success',
+					duration: 3000,
+					isClosable: true,
+				});
 
-export const getServerSideProps = async () => {
-	const [user, cars, sellers, sales] = await Promise.all([
-		api.get("users/1"),
-		api.get("cars/"),
-		api.get("sellers/"),
-		api.get("sales/"),
-	])
+				setEmail("");
+				setPassword("");
 
-	return {
-		props: {
-			user: user.data,
-			cars: cars.data,
-			sellers: sellers.data,
-			sales: sales.data,
+				router.push("/dashboard");
+			} else {
+				toast({
+					title: 'Erro ao logar',
+					description: "O login não foi aceito",
+					status: 'error',
+					duration: 3000,
+					isClosable: true,
+				})
+
+				setEmail("");
+				setPassword("");
+			}
+
+		} catch (error) {
+			console.log(error);
+
+			toast({
+				title: 'Erro ao logar',
+				description: "O login não foi aceito",
+				status: 'error',
+				duration: 5000,
+				isClosable: true,
+			})
 		}
 	}
-};
+
+	return (
+		<Flex height={"100vh"} justifyContent={"center"} alignItems={"center"}>
+			<form onSubmit={handleSubmit}>
+				<Flex p={4} bgColor={"gray.200"} borderRadius={"15px"} gap={5} flexDirection={"column"}>
+					<FormControl>
+						<FormLabel>Login</FormLabel>
+						<Input bg={"white"} placeholder={"Login"} type='text' onChange={event => setEmail(event.target.value)} value={email} />
+					</FormControl>
+					<FormControl>
+						<FormLabel>Senha</FormLabel>
+						<Input bg={"white"} placeholder={"Senha"} type='password' onChange={event => setPassword(event.target.value)} value={password} />
+					</FormControl>
+					<Button
+						type="submit"
+						colorScheme={"teal"}
+					>
+						Entrar
+					</Button>
+				</Flex>
+			</form>
+		</Flex>
+	);
+}
