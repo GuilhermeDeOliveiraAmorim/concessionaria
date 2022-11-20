@@ -42,12 +42,6 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
 	const { user, cars, sellers, sales } = props;
-
-	console.log(user);
-	console.log(cars);
-	console.log(sellers);
-	console.log(sales);
-
 	return (
 		<div>
 			{cars.map(car =>
