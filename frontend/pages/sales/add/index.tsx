@@ -4,6 +4,7 @@ import { useToast } from '@chakra-ui/react';
 import { Container } from '@chakra-ui/react';
 import { FormEvent, useState } from "react";
 import api from "../../../services/backend";
+import { Menu } from "../../../util/menu";
 import { Nav } from "../../../util/nav";
 
 interface ICar {
@@ -25,6 +26,19 @@ interface IAddSales {
     cars: ICar[],
     sellers: ISeller[]
 }
+
+const menuSales = [
+    {
+        id: 1,
+        title: "Adicionar",
+        link: "add",
+    },
+    {
+        id: 2,
+        title: "Listar",
+        link: "list",
+    },
+];
 
 export default function AddSales(props: IAddSales) {
     const { cars, sellers } = props;
@@ -73,6 +87,7 @@ export default function AddSales(props: IAddSales) {
     return (
         <div>
             <Nav />
+            <Menu title={"Vendas"} menu={menuSales} />
             <Container maxW='1280px'>
                 <form onSubmit={addCar}>
                     <Flex w='100%' p={4} gap={4} flexDirection={"column"}>

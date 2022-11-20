@@ -3,12 +3,26 @@ import { useToast } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import { FormEvent, useState } from "react";
 import api from "../../../services/backend";
+import { Menu } from "../../../util/menu";
 import { Nav } from "../../../util/nav";
 
 interface ISeller {
     id: number,
     name: string
 }
+
+const menuSellers = [
+    {
+        id: 1,
+        title: "Adicionar",
+        link: "add",
+    },
+    {
+        id: 2,
+        title: "Listar",
+        link: "list",
+    },
+];
 
 export default function AddSellers() {
     const [name, setName] = useState("");
@@ -48,6 +62,7 @@ export default function AddSellers() {
     return (
         <div>
             <Nav />
+            <Menu title="Vendedores" menu={menuSellers} />
             <Container maxW='1280px'>
                 <form onSubmit={addCar}>
                     <Flex w='100%' p={4} gap={4} flexDirection={"column"}>

@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import api from "../../../services/backend";
+import { Menu } from '../../../util/menu';
 import { Nav } from '../../../util/nav';
 
 interface ICar {
@@ -25,11 +26,25 @@ interface ListCarsProps {
     cars: ICar[];
 }
 
+const menuCars = [
+    {
+        id: 1,
+        title: "Adicionar",
+        link: "add",
+    },
+    {
+        id: 2,
+        title: "Listar",
+        link: "list",
+    },
+];
+
 export default function ListCars(props: ListCarsProps) {
     const { cars } = props;
     return (
         <div>
             <Nav />
+            <Menu title={"Carros"} menu={menuCars} />
             <Container maxW='1280px'>
                 <TableContainer>
                     <Table variant='striped' colorScheme='teal'>

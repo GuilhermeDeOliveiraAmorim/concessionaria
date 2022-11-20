@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, useToast } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Input, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { api } from "../get-api/axios";
