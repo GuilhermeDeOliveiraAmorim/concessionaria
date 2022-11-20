@@ -9,12 +9,14 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String)
     password = Column(String)
+    is_available = Column(Boolean, default=True)
 
 
 class Seller(Base):
     __tablename__ = "sellers"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
+    is_available = Column(Boolean, default=True)
 
 
 class Car(Base):
@@ -30,6 +32,7 @@ class Car(Base):
 class Sale(Base):
     __tablename__ = "sales"
     id = Column(Integer, primary_key=True, index=True)
+    is_available = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     car_id = Column(Integer, ForeignKey(
         "cars.id", ondelete="SET NULL"), nullable=True)
