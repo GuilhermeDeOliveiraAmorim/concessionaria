@@ -42,23 +42,20 @@ const menuSales = [
 
 export default function AddSales(props: IAddSales) {
     const { cars, sellers } = props;
-
-    // const carsFiltered = cars.filter(car => car.is_available === 1);
-
     const [car, setCar] = useState("");
     const [seller, setSeller] = useState("");
+    const [sold, setSold] = useState("");
 
     const toast = useToast()
 
     async function addCar(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        console.log(car, seller);
-
         try {
             const response = await api.post("/sales", {
                 car_id: car,
-                seller_id: seller
+                seller_id: seller,
+                sold_in: sold
             });
 
             toast({
@@ -71,6 +68,7 @@ export default function AddSales(props: IAddSales) {
 
             setCar("");
             setSeller("");
+            setSold("");
         } catch (error) {
             console.log(error);
 
@@ -104,6 +102,9 @@ export default function AddSales(props: IAddSales) {
                                     <option key={seller.id} value={seller.id}>{seller.name}</option>
                                 )}
                             </Select>
+                        </FormControl>
+                        <FormControl>
+                            <Input type={"date"} onChange={event => setSold(event.target.value)} value={sold} />
                         </FormControl>
                         <Button colorScheme='blue' type="submit">Adicionar</Button>
                     </Flex>

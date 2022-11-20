@@ -56,7 +56,6 @@ def get_sales(db: Session = Depends(get_db)):
 @router.get('/{sale_id}', response_model=ViewSale)
 def get_sales(sale_id: int, db: Session = Depends(get_db)):
     sale = db.query(Sale).get(sale_id)
-    print(sale)
     return sale
 
 

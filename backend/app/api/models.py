@@ -34,6 +34,7 @@ class Sale(Base):
     __tablename__ = "sales"
     id = Column(Integer, primary_key=True, index=True)
     is_available = Column(Integer, default=1)
+    sold_in = Column(String)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     car_id = Column(Integer, ForeignKey(
         "cars.id", ondelete="SET NULL"), nullable=True)

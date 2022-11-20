@@ -32,7 +32,8 @@ interface ISale {
     car_id: number,
     seller_id: number,
     created_at: string,
-    is_available: number
+    sold_in: string,
+    is_available: number,
     car: ICar,
     seller: ISeller
 }
@@ -56,6 +57,8 @@ const menuSales = [
 
 export default function ListSales(props: IListSales) {
     const { sales } = props;
+    console.log(sales);
+
     return (
         <div>
             <Nav />
@@ -67,7 +70,8 @@ export default function ListSales(props: IListSales) {
                             <Tr>
                                 <Th>Vendedor</Th>
                                 <Th>Modelo</Th>
-                                <Th>Data</Th>
+                                <Th>Data de Adição</Th>
+                                <Th>Data da Venda</Th>
                                 <Th isNumeric>Valor</Th>
                             </Tr>
                         </Thead>
@@ -77,6 +81,7 @@ export default function ListSales(props: IListSales) {
                                     <Td>{sale.seller.name}</Td>
                                     <Td>{sale.car.model}</Td>
                                     <Td>{sale.created_at}</Td>
+                                    <Td>{sale.sold_in}</Td>
                                     <Td isNumeric>{sale.car.value}</Td>
                                 </Tr>
                             )}

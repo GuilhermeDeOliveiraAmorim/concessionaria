@@ -34,6 +34,8 @@ interface HomeProps {
 
 export default function Dashboard(props: HomeProps) {
 	const { cars, sellers, sales } = props;
+	console.log(cars, sellers, sales);
+
 	return (
 		<div>
 			<Nav />
