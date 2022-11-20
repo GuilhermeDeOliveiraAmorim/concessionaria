@@ -19,8 +19,7 @@ interface ICar {
 
 interface ISeller {
 	id: number,
-	car_id: number,
-	is_available: number
+	name: string
 }
 
 interface ISale {
