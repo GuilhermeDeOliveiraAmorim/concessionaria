@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 
 from ..schemas.sale import AddSale, ViewSale
-from ..models import Sale
+from ..models import Sale, Car
 from ..database import get_db
 from sqlalchemy.orm import Session
 
@@ -14,12 +14,37 @@ router = APIRouter(
 
 @router.post('/')
 def add_sale(request: AddSale, db: Session = Depends(get_db)):
-    sale = Sale(**request.dict())
-    db.add(sale)
-    db.commit()
-    db.refresh(sale)
+    car_id = request.car_id
 
-    return sale
+    sales = db.query(Sale).filter(
+        Sale.car_id == car_id).count()
+
+    if (sales > 0) == False:
+        sale = Sale(**request.dict())
+        db.add(sale)
+        db.commit()
+        db.refresh(sale)
+
+        car = db.query(Car).get(car_id)
+
+        carUpdate = {
+            "id": car_id,
+            "make": car.make,
+            "model": car.model,
+            "transmission": car.transmission,
+            "year": car.year,
+            "value": car.value,
+            "is_available": 0
+        }
+
+        print(carUpdate)
+
+        db.query(Car).filter(Car.id == car_id).update(carUpdate)
+        db.commit()
+
+        return sale
+
+    return "Carro não disponível"
 
 
 @router.get('/', response_model=List[ViewSale])
@@ -28,11 +53,11 @@ def get_sales(db: Session = Depends(get_db)):
     return sales
 
 
-@router.get('/{sale_id}', response_model=List[ViewSale])
+@router.get('/{sale_id}', response_model=ViewSale)
 def get_sales(sale_id: int, db: Session = Depends(get_db)):
-    sales = db.query(Sale).filter(
-        Sale.sale_id == sale_id).all()
-    return sales
+    sale = db.query(Sale).get(sale_id)
+    print(sale)
+    return sale
 
 
 # @router.delete('/{genre_in_movie_id}')

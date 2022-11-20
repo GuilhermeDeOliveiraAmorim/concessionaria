@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 class AddSeller(BaseModel):
     name: str
-    is_available: bool
 
     class Config():
         orm_mode = True
@@ -12,7 +11,7 @@ class AddSeller(BaseModel):
 class ViewSeller(BaseModel):
     id: int
     name: str
-    is_available: bool
+    is_available: int
 
     class Config():
         orm_mode = True

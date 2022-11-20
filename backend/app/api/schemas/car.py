@@ -6,7 +6,7 @@ class AddCar(BaseModel):
     model: str
     transmission: str
     year: int
-    is_available: bool
+    value: float
 
     class Config():
         orm_mode = True
@@ -18,7 +18,8 @@ class ViewCar(BaseModel):
     model: str
     transmission: str
     year: int
-    is_available: bool
+    value: float
+    is_available: int
 
     class Config():
         orm_mode = True
