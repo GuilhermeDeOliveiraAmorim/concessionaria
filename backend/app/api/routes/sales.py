@@ -22,6 +22,12 @@ def add_sale(request: AddSale, db: Session = Depends(get_db)):
     return sale
 
 
+@router.get('/', response_model=List[ViewSale])
+def get_sales(db: Session = Depends(get_db)):
+    sales = db.query(Sale).all()
+    return sales
+
+
 @router.get('/{sale_id}', response_model=List[ViewSale])
 def get_sales(sale_id: int, db: Session = Depends(get_db)):
     sales = db.query(Sale).filter(

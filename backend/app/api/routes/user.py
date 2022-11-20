@@ -7,16 +7,22 @@ from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix='/api/users',
-    tags=['Usuário']
+    tags=['Users']
 )
 
 
 @router.post('/')
-def cadastrar_usuario(request: AddUser, db: Session = Depends(get_db)):
-    novo_usuario = User(email=request.email,
-                        password=Hash.bcrypt(request.password))
-    db.add(novo_usuario)
+def add_user(request: AddUser, db: Session = Depends(get_db)):
+    user = User(email=request.email,
+                password=request.password)
+    db.add(user)
     db.commit()
-    db.refresh(novo_usuario)
+    db.refresh(user)
 
-    return novo_usuario
+    return user
+
+
+@router.get('/{user_id}')
+def get_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).get(user_id)
+    return user

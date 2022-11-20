@@ -38,6 +38,8 @@ def get_car(car_id: int, db: Session = Depends(get_db)):
 @router.put('/{car_id}')
 def delete_car(request: AddCar, car_id: int, db: Session = Depends(get_db)):
 
+    print(request)
+
     db.query(Car).filter(Car.id == car_id).update(request.dict())
     db.commit()
 
