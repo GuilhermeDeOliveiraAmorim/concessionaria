@@ -32,9 +32,9 @@ class Sale(Base):
     id = Column(Integer, primary_key=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     car_id = Column(Integer, ForeignKey(
-        "car.id", ondelete="SET NULL"), nullable=True)
+        "cars.id", ondelete="SET NULL"), nullable=True)
     seller_id = Column(Integer, ForeignKey(
-        "genres.id", ondelete="SET NULL"), nullable=True)
+        "sellers.id", ondelete="SET NULL"), nullable=True)
 
     car = relationship("Car", foreign_keys=[car_id])
     seller = relationship("Seller", foreign_keys=[seller_id])

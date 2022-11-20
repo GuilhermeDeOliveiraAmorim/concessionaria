@@ -3,7 +3,7 @@ from app.api.routes import user, cars, sales, sellers
 from app.api.database import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.api.routes import cars, sales, sellers, user
+# from backend.app.api.routes import cars, sales, sellers, user
 
 origins = [
     "http://localhost:3000",
