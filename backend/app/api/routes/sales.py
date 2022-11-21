@@ -37,8 +37,6 @@ def add_sale(request: AddSale, db: Session = Depends(get_db)):
             "is_available": 0
         }
 
-        print(carUpdate)
-
         db.query(Car).filter(Car.id == car_id).update(carUpdate)
         db.commit()
 
@@ -50,6 +48,16 @@ def add_sale(request: AddSale, db: Session = Depends(get_db)):
 @router.get('/', response_model=List[ViewSale])
 def get_sales(db: Session = Depends(get_db)):
     sales = db.query(Sale).all()
+    return sales
+
+
+@router.get('/sellers', response_model=List[ViewSale])
+def get_sales(db: Session = Depends(get_db)):
+    sales = db.query(Sale).all()
+
+    for sale in sales:
+        print(sale.id)
+
     return sales
 
 

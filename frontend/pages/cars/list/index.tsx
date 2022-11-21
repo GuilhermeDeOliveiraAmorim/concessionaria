@@ -6,6 +6,7 @@ import {
     Th,
     Td,
     TableContainer,
+    Badge,
 } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react';
 import api from "../../../services/backend";
@@ -55,6 +56,7 @@ export default function ListCars(props: ListCarsProps) {
                                 <Th>Transmissão</Th>
                                 <Th isNumeric>Ano</Th>
                                 <Th isNumeric>Valor</Th>
+                                <Th isNumeric>Disponibilidade</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -65,6 +67,15 @@ export default function ListCars(props: ListCarsProps) {
                                     <Td>{car.transmission}</Td>
                                     <Td isNumeric>{car.year}</Td>
                                     <Td isNumeric>{car.value}</Td>
+                                    <Td isNumeric>
+                                        <Badge
+                                            colorScheme={car.is_available === 1 ? "green" : "red"}
+                                            shadow={"base"}
+                                            rounded={"md"}
+                                        >
+                                            {car.is_available === 1 ? "disponível" : "vendido"}
+                                        </Badge>
+                                    </Td>
                                 </Tr>
                             )}
                         </Tbody>
