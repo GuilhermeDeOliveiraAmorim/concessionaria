@@ -4,6 +4,8 @@ Vídeo explicativo: https://www.loom.com/share/1f65d1a39179479a9b7d5eaff9696f33
 
 Para inicializar o projeto:
 
+Será necessário setar as credenciais de um banco de dados PostgreSQL em backend/app/api/database.py
+
 ```bash
 # na raiz do projeto
 source venv/bin/activate
