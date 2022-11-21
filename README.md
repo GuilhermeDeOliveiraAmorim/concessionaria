@@ -1,5 +1,7 @@
 # Concessionária
 
+Vídeo explicativo: https://www.loom.com/share/1f65d1a39179479a9b7d5eaff9696f33
+
 Para inicializar o projeto:
 
 ```bash
